@@ -5,51 +5,55 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-/>
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
     <title>youcode_cuisinie</title>
   </head>
   <body class="bg-[#f7f7fa]">
     <header class="flex justify-between items-center mx-10">
       <div>
-        <img src="logo.png" alt="logo" class="h-32 w-32">
+        <img src="logo.png" alt="logo" class="h-32 w-32" />
       </div>
       <div class="icon space-x-4">
-        <button id="ajouter" class="bg-green-500 p-2 rounded-2xl text-[19px] text-white hover:bg-green-600 transition-colors ">+ Ajouter une recette</button>
+        <button
+          id="ajouter"
+          class="bg-green-500 p-2 rounded-2xl text-[19px] text-white hover:bg-green-600 transition-colors"
+        >
+          + Ajouter une recette
+        </button>
         <i class="fa-regular fa-circle-user text-[23px] hover:text-red-500"></i>
         <i class="fa-regular fa-bell text-[23px] hover:text-red-500"></i>
-
       </div>
     </header>
 
-<section class="hero relative mx-4 md:mx-10 mt-6 min-h-[350px] rounded-3xl overflow-hidden">
-
-  <div class="intro relative z-10 flex flex-col justify-center h-full min-h-[350px] px-5 md:px-10 space-y-3 text-white">
-
-    <h1 class="text-2xl md:text-4xl font-semibold">
-      Discover Delicious Recipes
-    </h1>
-
-    <p class="text-sm md:text-base">
-      Find inspiration for your next cooking adventure.
-    </p>
-
-    <div class="flex items-center gap-3 bg-white text-black rounded-2xl p-2 w-full max-w-md">
-
-      <i class="fas fa-search text-gray-500 ml-2"></i>
-
-      <input
-        type="text"
-        placeholder="Rechercher une recette ..."
-        class="w-full min-w-0 focus:outline-none text-sm md:text-base"
+    <section
+      class="hero relative mx-4 md:mx-10 mt-6 min-h-[350px] rounded-3xl overflow-hidden"
+    >
+      <div
+        class="intro relative z-10 flex flex-col justify-center h-full min-h-[350px] px-5 md:px-10 space-y-3 text-white"
       >
+        <h1 class="text-2xl md:text-4xl font-semibold">
+          Discover Delicious Recipes
+        </h1>
 
-    </div>
+        <p class="text-sm md:text-base">
+          Find inspiration for your next cooking adventure.
+        </p>
 
-  </div>
+        <div
+          class="flex items-center gap-3 bg-white text-black rounded-2xl p-2 w-full max-w-md"
+        >
+          <i class="fas fa-search text-gray-500 ml-2"></i>
 
-</section>
+          <input
+            type="text"
+            placeholder="Rechercher une recette ..."
+            class="w-full min-w-0 focus:outline-none text-sm md:text-base"
+          />
+        </div>
+      </div>
+    </section>
 
     <script type="module" src="/src/main.js"></script>
   </body>
