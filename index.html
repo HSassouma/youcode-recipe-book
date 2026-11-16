@@ -55,6 +55,57 @@
       </div>
     </section>
 
+    <main class="mx-4 md:mx-10 mt-10">
+      <div class="header flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">Nos recettes</h1>
+        <span id="nombre_recettes" class="text-gray-500 font-medium"
+          >12 recettes</span
+        >
+      </div>
+
+      <section
+        id="contener_recette"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <div
+          class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300"
+        >
+          <img src="/pizza.jpg" alt="Pizza" class="w-full h-52 object-cover" />
+
+          <div class="p-5 space-y-3">
+            <h2 class="text-xl font-bold text-gray-800">Pizza</h2>
+
+            <div
+              class="flex items-center justify-between text-gray-500 text-sm"
+            >
+              <p>
+                <i class="fa-solid fa-utensils mr-1"></i>
+                Italia
+              </p>
+
+              <p>
+                <i class="fa-regular fa-clock mr-1"></i>
+                25 min
+              </p>
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <span
+                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold"
+              >
+                Easy
+              </span>
+
+              <button class="text-red-500 hover:text-red-700 transition">
+                <i class="fa-regular fa-trash-can mr-1"></i>
+                <span>Supprimer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
