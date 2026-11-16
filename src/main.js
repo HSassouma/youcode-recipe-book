@@ -1,3 +1,4 @@
-import { getRecette } from './function.js'
+import { afficherCard, getRecette } from './function.js'
 import './style.css'
-getRecette()
+ let data= await getRecette()
+ afficherCard(data.recipes)
