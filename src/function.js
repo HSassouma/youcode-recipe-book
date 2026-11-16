@@ -1,11 +1,13 @@
 import { api } from "./api.js";
 export async function getRecette () {
-    const responce=await api.get("/recipes?limit=12")
+    const responce=await api.get("/recipes?limit=15")
     console.log(responce.data)
     return responce.data
 }
 export function afficherCard(tab){
     const contener=document.querySelector("#contener_recette")
+    const nombreCard=document.querySelector("#nombre_recettes")
+    nombreCard.textContent=`${tab.length} recettes`
     contener.innerHTML=""
 tab.forEach(e => {
         const card=document.createElement("div")
@@ -38,7 +40,7 @@ tab.forEach(e => {
                ${e.difficulty} 
               </span>
 
-              <button class="text-red-500 hover:text-red-700 transition">
+              <button class="bg-red-500 p-1.5 rounded-2xl text-white hover:bg-red-700 transition">
                 <i class="fa-regular fa-trash-can mr-1"></i>
                 <span>Supprimer</span>
               </button>
