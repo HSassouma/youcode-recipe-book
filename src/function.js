@@ -65,3 +65,9 @@ export function fermerForm(){
    const form =document.getElementById("form")
   form.classList.add("hidden")
 }
+
+
+export async function ajouteerRecette(recette){
+  const response=await api.post("/recipes/add",recette)
+  return response.data
+}
