@@ -67,9 +67,121 @@
       <section
         id="contener_recette"
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-      >
-      </section>
+      ></section>
     </main>
+
+   
+<section
+  id="form"
+  class=" fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+>
+  <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 md:p-8">
+    <div class="flex justify-between items-start mb-6">
+      <div class="flex items-center gap-4">
+        <div class="bg-green-100 text-green-800 w-14 h-14 rounded-full flex items-center justify-center">
+          <i class="fa-solid fa-utensils text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">
+            Nouvelle recette
+          </h1>
+          <p class="text-gray-500 text-sm mt-1">
+            Partagez votre recette préférée avec la communauté.
+          </p>
+        </div>
+      </div>
+      <button
+        type="button"
+        id="fermer_form"
+        class="text-gray-500 hover:text-red-500 transition text-xl"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="border-t border-gray-200 pt-6">
+      <form id="form_recette" class="space-y-4">
+        <div class="space-y-2">
+          <label for="nom" class="block font-semibold text-gray-800">
+            Nom de la recette <span class="text-red-500">*</span>
+          </label>
+        <input
+            type="text"
+            id="nom"
+            placeholder="Ex: Moroccan Chicken Tagine"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100"
+          />
+          <span id="eror_nom" class="hidden text-sm text-red-700">
+            Le nom doit contenir entre 3 et 60 caractères
+          </span>
+        </div>
+        <div class="space-y-2">
+          <label for="cuisine" class="block font-semibold text-gray-800">
+            Cuisine <span class="text-red-500">*</span>
+          </label>
+
+          <input
+            type="text"
+            id="cuisine"
+            placeholder="Ex: Moroccan"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100"
+          />
+         <span id="erorr_cuisine" class="hidden text-sm text-red-700">Veuillez saisir le type de cuisine.</span>
+        </div>
+        <div class="space-y-2">
+          <label for="difficulte" class="block font-semibold text-gray-800">
+            Difficulté <span class="text-red-500">*</span>
+          </label>
+          <select
+            id="difficulte"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100"
+          >
+            <option value="">Choisir une difficulté</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+
+          <span id="erorr_difficulte" class="hidden text-sm text-red-700">Veuillez sélectionner un niveau de difficulté.</span>
+        </div>
+        <div class="space-y-2">
+          <label for="temps" class="block font-semibold text-gray-800">
+            Temps de préparation (minutes)
+            <span class="text-red-500">*</span>
+          </label>
+
+          <input
+            type="number"
+            id="temps"
+            placeholder="Ex: 30"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100"
+          />
+
+         <span id="erorr_difficulte" class="hidden text-sm text-red-700">Veuillez sélectionner un niveau de difficulté.</span>
+        <div class="border-t border-gray-200 pt-5 flex justify-end gap-3">
+
+          <button
+            type="button"
+            id="annuler_form"
+            class="bg-gray-100 text-gray-800 px-5 py-3 rounded-xl font-semibold hover:bg-gray-200 transition"
+          >
+            Annuler
+          </button>
+
+          <button
+            type="submit"
+            id="btn_ajouter_recette"
+            class="bg-green-800 text-white px-5 py-3 rounded-xl font-semibold hover:bg-green-900 transition"
+          >
+            <i class="fa-solid fa-plus mr-2"></i>
+            Ajouter la recette
+          </button>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>
 
     <script type="module" src="/src/main.js"></script>
   </body>
