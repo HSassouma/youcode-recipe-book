@@ -64,6 +64,11 @@
         >
       </div>
 
+      <div
+        id="message_succes"
+        class="hidden mb-6 rounded-xl bg-green-100 text-green-800 px-4 py-3 font-medium"
+      ></div>
+
       <section
         id="contener_recette"
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -156,7 +161,11 @@
             class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100"
           />
 
-         <span id="erorr_difficulte" class="hidden text-sm text-red-700">Veuillez sélectionner un niveau de difficulté.</span>
+          <span id="erorr_temps" class="hidden text-sm text-red-700">Le temps de préparation doit être entre 1 et 300 minutes.</span>
+        </div>
+
+        <p id="erreur_api" class="hidden text-sm text-red-700"></p>
+
         <div class="border-t border-gray-200 pt-5 flex justify-end gap-3">
 
           <button
