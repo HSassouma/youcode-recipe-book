@@ -1,4 +1,4 @@
-import { afficherCard, afficherForm, getRecette,rechercherRecette } from './function.js'
+import { afficherCard, afficherForm, fermerForm, getRecette,rechercherRecette } from './function.js'
 import './style.css'
  let data= await getRecette()
  afficherCard(data.recipes)
@@ -17,3 +17,8 @@ input.addEventListener("input", async () => {
 
 const ajouterbtn=document.getElementById("ajouter")
 ajouterbtn.addEventListener("click",afficherForm)
+
+const Xform=document.getElementById("fermer_form")
+const btnFermer=document.getElementById("annuler_form")
+Xform.addEventListener("click",fermerForm)
+btnFermer.addEventListener("click",fermerForm)

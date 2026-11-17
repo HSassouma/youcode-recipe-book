@@ -60,3 +60,8 @@ export function afficherForm(){
   const form =document.getElementById("form")
   form.classList.remove("hidden")
 }
+
+export function fermerForm(){
+   const form =document.getElementById("form")
+  form.classList.add("hidden")
+}
