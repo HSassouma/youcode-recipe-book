@@ -51,3 +51,7 @@ tab.forEach(e => {
         contener.append(card)
     });
 }
+export async function rechercherRecette(query) {
+    const response = await api.get(`/recipes/search?q=${query}`);
+    return response.data;
+}
