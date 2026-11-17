@@ -55,3 +55,8 @@ export async function rechercherRecette(query) {
     const response = await api.get(`/recipes/search?q=${query}`);
     return response.data;
 }
+
+export function afficherForm(){
+  const form =document.getElementById("form")
+  form.classList.remove("hidden")
+}

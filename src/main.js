@@ -1,4 +1,4 @@
-import { afficherCard, getRecette,rechercherRecette } from './function.js'
+import { afficherCard, afficherForm, getRecette,rechercherRecette } from './function.js'
 import './style.css'
  let data= await getRecette()
  afficherCard(data.recipes)
@@ -14,3 +14,6 @@ input.addEventListener("input", async () => {
     const data = await rechercherRecette(query);
     afficherCard(data.recipes);
 });
+
+const ajouterbtn=document.getElementById("ajouter")
+ajouterbtn.addEventListener("click",afficherForm)
