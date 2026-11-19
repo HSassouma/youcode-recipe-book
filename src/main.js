@@ -1,3 +1,4 @@
+
 import {
   afficherCard,
   afficherForm,
@@ -11,14 +12,20 @@ import {
   afficherMessageErreur,
   cacherMessageErreur,
   afficherAucuneRecette,
+  confirmRecette
 } from "./function.js";
 
 import { validerRecette } from "./validation.js";
 import "./style.css";
 
+// Affichage initial des recettes
 let data = await getRecette();
 afficherCard(data.recipes);
 
+// Activation de la suppression
+confirmRecette();
+
+// Recherche des recettes
 const input = document.querySelector("#recherche");
 
 input.addEventListener("input", async () => {
@@ -40,15 +47,18 @@ input.addEventListener("input", async () => {
   afficherCard(data.recipes);
 });
 
+// Ouverture du formulaire
 const ajouterbtn = document.getElementById("ajouter");
 ajouterbtn.addEventListener("click", afficherForm);
 
+// Fermeture du formulaire
 const Xform = document.getElementById("fermer_form");
 const btnFermer = document.getElementById("annuler_form");
 
 Xform.addEventListener("click", fermerForm);
 btnFermer.addEventListener("click", fermerForm);
 
+// Ajout d'une recette
 const formRecette = document.querySelector("#form_recette");
 const btnAjouter = document.querySelector("#btn_ajouter_recette");
 
@@ -89,10 +99,12 @@ formRecette.addEventListener("submit", async (event) => {
 
     formRecette.reset();
     fermerForm();
+
   } catch (error) {
     afficherMessageErreur(
-      "Impossible d'ajouter la recette. Veuillez réessayer.",
+      "Impossible d'ajouter la recette. Veuillez réessayer."
     );
+
   } finally {
     btnAjouter.disabled = false;
   }

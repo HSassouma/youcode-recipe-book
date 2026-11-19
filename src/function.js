@@ -173,8 +173,40 @@ export async function ajouterRecette(recette) {
   return response.data;
 }
 
+export async function supprimerRecette(id) {
+  const response = await api.delete(`/recipes/${id}`);
+  return response.data;
+}
 
-export async function supprimerRecette(id){
-   const response=await api.delete(`/recipes/${id}`)
-   return response.data
+export function confirmRecette() {
+  const contener = document.querySelector("#contener_recette");
+  const nombreCard = document.querySelector("#nombre_recettes");
+
+  contener.addEventListener("click", async (event) => {
+    const bouton = event.target.closest("button[data-id]");
+
+    if (!bouton) {
+      return;
+    }
+
+    const id = bouton.dataset.id;
+
+    if (!confirm("Voulez-vous vraiment supprimer cette recette ?")) {
+      return;
+    }
+
+    try {
+      await supprimerRecette(id);
+
+      bouton.closest(".bg-white").remove();
+
+      nombreCard.textContent = `${contener.querySelectorAll("button[data-id]").length} recettes`;
+
+      afficherMessageSucces("La recette a été supprimée avec succès.");
+    } catch (error) {
+      afficherMessageErreur(
+        "Impossible de supprimer cette recette. Veuillez réessayer.",
+      );
+    }
+  });
 }
