@@ -4,34 +4,75 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Découvrez et partagez de délicieuses recettes du monde entier : recherchez par cuisine, difficulté et temps de préparation."
+    />
+    <!-- L'image du hero est un background CSS : le préchargement évite sa découverte tardive (LCP) -->
+    <link rel="preload" as="image" href="/hero.jpg" fetchpriority="high" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/webfonts/fa-solid-900.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/webfonts/fa-regular-400.woff2"
+      crossorigin
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      />
+    </noscript>
     <title>youcode_cuisinie</title>
   </head>
   <body class="bg-[#f7f7fa]">
-    <header class="flex justify-between items-center mx-10">
-      <div>
-        <img src="logo.png" alt="logo" class="h-32 w-32" />
+    <header
+      class="flex justify-between items-center gap-2 mx-4 md:mx-10 py-2 md:py-0"
+    >
+      <div class="shrink-0">
+        <img
+          src="logo.png"
+          alt="logo"
+          width="192"
+          height="192"
+          class="h-16 w-16 sm:h-24 sm:w-24 md:h-32 md:w-32"
+        />
       </div>
-      <div class="icon space-x-4">
+      <div class="icon flex items-center space-x-2 md:space-x-4 shrink-0">
         <button
           id="ajouter"
-          class="bg-green-500 p-2 rounded-2xl text-[19px] text-white hover:bg-green-600 transition-colors"
+          class="bg-green-500 p-2 rounded-2xl text-[13px] sm:text-[15px] md:text-[19px] text-white hover:bg-green-600 transition-colors whitespace-nowrap"
         >
           + Ajouter une recette
         </button>
-        <i class="fa-regular fa-circle-user text-[23px] hover:text-red-500"></i>
-        <i class="fa-regular fa-bell text-[23px] hover:text-red-500"></i>
+        <i
+          class="fa-regular fa-circle-user text-[20px] md:text-[23px] hover:text-red-500"
+        ></i>
+        <i
+          class="fa-regular fa-bell text-[20px] md:text-[23px] hover:text-red-500"
+        ></i>
       </div>
     </header>
 
     <section
-      class="hero relative mx-4 md:mx-10 mt-6 min-h-[350px] rounded-3xl overflow-hidden"
+      class="hero relative mx-4 md:mx-10 mt-4 md:mt-6 min-h-[280px] md:min-h-[350px] rounded-3xl overflow-hidden"
     >
       <div
-        class="intro relative z-10 flex flex-col justify-center h-full min-h-[350px] px-5 md:px-10 space-y-3 text-white"
+        class="intro relative z-10 flex flex-col justify-center h-full min-h-[280px] md:min-h-[350px] px-4 sm:px-5 md:px-10 py-6 space-y-3 text-white"
       >
         <h1 class="text-2xl md:text-4xl font-semibold">
           Discover Delicious Recipes
@@ -42,24 +83,24 @@
         </p>
 
         <div
-          class="flex items-center gap-3 bg-white text-black rounded-2xl p-2 w-full max-w-md"
+          class="flex items-center gap-2 md:gap-3 bg-white text-black rounded-2xl p-2 w-full max-w-md"
         >
-          <i class="fas fa-search text-gray-500 ml-2"></i>
+          <i class="fas fa-search text-gray-500 ml-2 shrink-0"></i>
 
           <input
             type="text"
             id="recherche"
             placeholder="Rechercher une recette ..."
-            class="w-full min-w-0 focus:outline-none text-sm md:text-base"
+            class="w-full min-w-0 focus:outline-none text-base"
           />
         </div>
       </div>
     </section>
 
-    <main class="mx-4 md:mx-10 mt-10">
-      <div class="header flex items-center justify-between mb-6">
+    <main class="mx-4 md:mx-10 mt-8 md:mt-10">
+      <div class="header flex items-center justify-between gap-2 mb-6">
         <h1 class="text-2xl font-bold text-gray-800">Nos recettes</h1>
-        <span id="nombre_recettes" class="text-gray-500 font-medium"
+        <span id="nombre_recettes" class="text-gray-500 font-medium shrink-0"
           >12 recettes</span
         >
       </div>
@@ -71,23 +112,23 @@
 
       <section
         id="contener_recette"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
       ></section>
     </main>
 
    
 <section
   id="form"
-  class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 hidden "
+  class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto hidden "
 >
-  <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 md:p-8">
-    <div class="flex justify-between items-start mb-6">
-      <div class="flex items-center gap-4">
-        <div class="bg-green-100 text-green-800 w-14 h-14 rounded-full flex items-center justify-center">
-          <i class="fa-solid fa-utensils text-2xl"></i>
+  <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-5 sm:p-6 md:p-8 my-auto max-h-[calc(100dvh-1.5rem)] overflow-y-auto">
+    <div class="flex justify-between items-start gap-3 mb-5 sm:mb-6">
+      <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+        <div class="bg-green-100 text-green-800 w-11 h-11 sm:w-14 sm:h-14 shrink-0 rounded-full flex items-center justify-center">
+          <i class="fa-solid fa-utensils text-xl sm:text-2xl"></i>
         </div>
-        <div>
-          <h1 class="text-2xl font-bold text-gray-900">
+        <div class="min-w-0">
+          <h1 class="text-xl sm:text-2xl font-bold text-gray-900">
             Nouvelle recette
           </h1>
           <p class="text-gray-500 text-sm mt-1">
@@ -98,12 +139,12 @@
       <button
         type="button"
         id="fermer_form"
-        class="text-gray-500 hover:text-red-500 transition text-xl"
+        class="text-gray-500 hover:text-red-500 transition text-xl shrink-0 p-1 -m-1"
       >
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
-    <div class="border-t border-gray-200 pt-6">
+    <div class="border-t border-gray-200 pt-5 sm:pt-6">
       <form id="form_recette" class="space-y-4">
         <div class="space-y-2">
           <label for="nom" class="block font-semibold text-gray-800">
@@ -166,12 +207,12 @@
 
         <p id="erreur_api" class="hidden text-sm text-red-700"></p>
 
-        <div class="border-t border-gray-200 pt-5 flex justify-end gap-3">
+        <div class="border-t border-gray-200 pt-5 flex flex-col sm:flex-row sm:justify-end gap-3">
 
           <button
             type="button"
             id="annuler_form"
-            class="bg-gray-100 text-gray-800 px-5 py-3 rounded-xl font-semibold hover:bg-gray-200 transition"
+            class="bg-gray-100 text-gray-800 px-5 py-3 rounded-xl font-semibold hover:bg-gray-200 transition w-full sm:w-auto"
           >
             Annuler
           </button>
@@ -179,7 +220,7 @@
           <button
             type="submit"
             id="btn_ajouter_recette"
-            class="bg-green-800 text-white px-5 py-3 rounded-xl font-semibold hover:bg-green-900 transition"
+            class="bg-green-800 text-white px-5 py-3 rounded-xl font-semibold hover:bg-green-900 transition w-full sm:w-auto"
           >
             <i class="fa-solid fa-plus mr-2"></i>
             Ajouter la recette

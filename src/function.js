@@ -10,33 +10,33 @@ function creerCard(recette) {
   card.innerHTML = `<div
           class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300"
         >
-          <img src="${recette.image}" alt="${recette.name}" class="w-full h-52 object-cover" />
+          <img src="${recette.image}" alt="${recette.name}" loading="lazy" decoding="async" class="w-full h-44 sm:h-52 object-cover" />
 
-          <div class="p-5 space-y-3">
-            <h2 class="text-xl font-bold text-gray-800">${recette.name}</h2>
+          <div class="p-4 sm:p-5 space-y-3">
+            <h2 class="text-lg sm:text-xl font-bold text-gray-800 break-words">${recette.name}</h2>
 
             <div
-              class="flex items-center justify-between text-gray-500 text-sm"
+              class="flex items-center justify-between gap-2 text-gray-500 text-sm"
             >
-              <p>
+              <p class="truncate">
                 <i class="fa-solid fa-utensils mr-1"></i>
                 ${recette.cuisine}
               </p>
 
-              <p>
+              <p class="shrink-0">
                 <i class="fa-regular fa-clock mr-1"></i>
              ${recette.prepTimeMinutes} min
               </p>
             </div>
 
-            <div class="flex items-center justify-between pt-2">
+            <div class="flex items-center justify-between gap-2 pt-2">
               <span
-                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold"
+                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold shrink-0"
               >
                ${recette.difficulty}
               </span>
 
-              <button data-id="${recette.id}" class="bg-red-500 p-1.5 rounded-2xl text-white hover:bg-red-700 transition">
+              <button data-id="${recette.id}" class="bg-red-500 p-1.5 rounded-2xl text-white hover:bg-red-700 transition shrink-0">
                 <i class="fa-regular fa-trash-can mr-1"></i>
                 <span>Supprimer</span>
               </button>
