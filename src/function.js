@@ -36,7 +36,7 @@ function creerCard(recette) {
                ${recette.difficulty}
               </span>
 
-              <button class="bg-red-500 p-1.5 rounded-2xl text-white hover:bg-red-700 transition">
+              <button data-id="${recette.id}" class="bg-red-500 p-1.5 rounded-2xl text-white hover:bg-red-700 transition">
                 <i class="fa-regular fa-trash-can mr-1"></i>
                 <span>Supprimer</span>
               </button>
@@ -171,4 +171,10 @@ export function cacherMessageErreur() {
 export async function ajouterRecette(recette) {
   const response = await api.post("/recipes/add", recette);
   return response.data;
+}
+
+
+export async function supprimerRecette(id){
+   const response=await api.delete(`/recipes/${id}`)
+   return response.data
 }
