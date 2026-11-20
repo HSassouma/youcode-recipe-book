@@ -1,8 +1,49 @@
 import { api } from "./api.js";
 export async function getRecette() {
-  const responce = await api.get("/recipes?limit=15");
-  console.log(responce.data);
+  const responce = await api.get("/recipes?limit=12");
   return responce.data;
+}
+
+export function getMessageErreur(error) {
+  if (error.code === "ERR_NETWORK") {
+    return "Impossible de contacter le serveur. Vérifiez votre connexion.";
+  }
+
+  if (error.code === "ECONNABORTED" || error.code === "ETIMEDOUT") {
+    return "Le serveur met trop de temps à répondre. Veuillez réessayer.";
+  }
+
+  if (error.response && error.response.status === 404) {
+    return "La ressource demandée est introuvable.";
+  }
+
+  if (error.response && error.response.status === 500) {
+    return "Une erreur est survenue sur le serveur. Veuillez réessayer.";
+  }
+
+  return "Une erreur inattendue est survenue.";
+}
+
+export function afficherChargement(texte) {
+  const chargement = document.querySelector("#chargement");
+  document.querySelector("#chargement_texte").textContent = texte;
+  chargement.classList.remove("hidden");
+  chargement.classList.add("flex");
+}
+
+export function cacherChargement() {
+  const chargement = document.querySelector("#chargement");
+  chargement.classList.add("hidden");
+  chargement.classList.remove("flex");
+}
+
+export function afficherErreurChargement(message) {
+  document.querySelector("#erreur_chargement_texte").textContent = message;
+  document.querySelector("#erreur_chargement").classList.remove("hidden");
+}
+
+export function cacherErreurChargement() {
+  document.querySelector("#erreur_chargement").classList.add("hidden");
 }
 
 function creerCard(recette) {
@@ -36,7 +77,7 @@ function creerCard(recette) {
                ${recette.difficulty}
               </span>
 
-              <button data-id="${recette.id}" class="bg-red-500 p-1.5 rounded-2xl text-white hover:bg-red-700 transition shrink-0">
+              <button data-id="${recette.id}" class="bg-red-500 p-1.5 rounded-2xl text-white hover:bg-red-700 transition shrink-0 disabled:opacity-60 disabled:cursor-not-allowed">
                 <i class="fa-regular fa-trash-can mr-1"></i>
                 <span>Supprimer</span>
               </button>
@@ -97,8 +138,17 @@ export function afficherAucuneRecette() {
     '<i class="fa-solid fa-utensils mr-2"></i> Afficher les 12 recettes';
 
   btn.addEventListener("click", async () => {
-    const data = await getRecette();
-    afficherCard(data.recipes);
+    cacherMessageErreur();
+    afficherChargement("Chargement des recettes...");
+
+    try {
+      const data = await getRecette();
+      afficherCard(data.recipes);
+    } catch (error) {
+      afficherMessageErreur(getMessageErreur(error));
+    } finally {
+      cacherChargement();
+    }
   });
 
   div.append(icon, h2, p, btn);
@@ -159,12 +209,22 @@ export function afficherMessageSucces(message) {
 }
 
 export function afficherMessageErreur(message) {
-  const messageErreur = document.querySelector("#erreur_api");
+  const messageErreur = document.querySelector("#message_erreur");
   messageErreur.textContent = message;
   messageErreur.classList.remove("hidden");
 }
 
 export function cacherMessageErreur() {
+  document.querySelector("#message_erreur").classList.add("hidden");
+}
+
+export function afficherErreurFormulaire(message) {
+  const messageErreur = document.querySelector("#erreur_api");
+  messageErreur.textContent = message;
+  messageErreur.classList.remove("hidden");
+}
+
+export function cacherErreurFormulaire() {
   document.querySelector("#erreur_api").classList.add("hidden");
 }
 
@@ -195,6 +255,13 @@ export function confirmRecette() {
       return;
     }
 
+    cacherMessageErreur();
+
+    const contenuBouton = bouton.innerHTML;
+    bouton.disabled = true;
+    bouton.innerHTML =
+      '<i class="fa-solid fa-spinner animate-spin mr-1"></i><span>Suppression...</span>';
+
     try {
       await supprimerRecette(id);
 
@@ -204,9 +271,10 @@ export function confirmRecette() {
 
       afficherMessageSucces("La recette a été supprimée avec succès.");
     } catch (error) {
-      afficherMessageErreur(
-        "Impossible de supprimer cette recette. Veuillez réessayer.",
-      );
+      afficherMessageErreur(getMessageErreur(error));
+    } finally {
+      bouton.innerHTML = contenuBouton;
+      bouton.disabled = false;
     }
   });
 }

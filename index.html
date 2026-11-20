@@ -110,6 +110,33 @@
         class="hidden mb-6 rounded-xl bg-green-100 text-green-800 px-4 py-3 font-medium"
       ></div>
 
+      <div
+        id="message_erreur"
+        class="hidden mb-6 rounded-xl bg-red-100 text-red-800 px-4 py-3 font-medium"
+      ></div>
+
+      <div
+        id="chargement"
+        class="hidden mb-6 items-center justify-center gap-3 rounded-xl bg-white px-4 py-6 font-medium text-gray-600 shadow-sm"
+      >
+        <i class="fa-solid fa-spinner animate-spin text-green-700"></i>
+        <span id="chargement_texte">Chargement des recettes...</span>
+      </div>
+
+      <div
+        id="erreur_chargement"
+        class="hidden mb-6 rounded-xl bg-red-100 px-4 py-6 text-center text-red-800"
+      >
+        <p id="erreur_chargement_texte" class="mb-4 font-medium"></p>
+        <button
+          type="button"
+          id="btn_reessayer"
+          class="rounded-xl bg-green-700 px-6 py-3 font-semibold text-white shadow-md transition hover:bg-green-800 hover:shadow-lg active:scale-95"
+        >
+          <i class="fa-solid fa-rotate-right mr-2"></i> Réessayer
+        </button>
+      </div>
+
       <section
         id="contener_recette"
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
@@ -220,7 +247,7 @@
           <button
             type="submit"
             id="btn_ajouter_recette"
-            class="bg-green-800 text-white px-5 py-3 rounded-xl font-semibold hover:bg-green-900 transition w-full sm:w-auto"
+            class="bg-green-800 text-white px-5 py-3 rounded-xl font-semibold hover:bg-green-900 transition w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed"
           >
             <i class="fa-solid fa-plus mr-2"></i>
             Ajouter la recette

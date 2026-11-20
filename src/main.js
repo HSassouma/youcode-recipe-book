@@ -11,16 +11,42 @@ import {
   afficherMessageSucces,
   afficherMessageErreur,
   cacherMessageErreur,
+  afficherErreurFormulaire,
+  cacherErreurFormulaire,
   afficherAucuneRecette,
+  afficherChargement,
+  cacherChargement,
+  afficherErreurChargement,
+  cacherErreurChargement,
+  getMessageErreur,
   confirmRecette
 } from "./function.js";
 
 import { validerRecette } from "./validation.js";
 import "./style.css";
 
+async function chargerRecettes() {
+  cacherMessageErreur();
+  cacherErreurChargement();
+  afficherChargement("Chargement des recettes...");
+
+  try {
+    const data = await getRecette();
+    afficherCard(data.recipes);
+  } catch (error) {
+    document.querySelector("#contener_recette").innerHTML = "";
+    document.querySelector("#nombre_recettes").textContent = "0 recettes";
+    afficherErreurChargement(getMessageErreur(error));
+  } finally {
+    cacherChargement();
+  }
+}
+
 // Affichage initial des recettes
-let data = await getRecette();
-afficherCard(data.recipes);
+await chargerRecettes();
+
+// Nouvel essai après une erreur de chargement
+document.querySelector("#btn_reessayer").addEventListener("click", chargerRecettes);
 
 // Activation de la suppression
 confirmRecette();
@@ -31,20 +57,27 @@ const input = document.querySelector("#recherche");
 input.addEventListener("input", async () => {
   const query = input.value.trim();
 
-  if (query === "") {
-    const data = await getRecette();
+  cacherMessageErreur();
+  cacherErreurChargement();
+  afficherChargement(
+    query === "" ? "Chargement des recettes..." : "Recherche en cours...",
+  );
+
+  try {
+    const data =
+      query === "" ? await getRecette() : await rechercherRecette(query);
+
+    if (data.recipes.length === 0) {
+      afficherAucuneRecette();
+      return;
+    }
+
     afficherCard(data.recipes);
-    return;
+  } catch (error) {
+    afficherMessageErreur(getMessageErreur(error));
+  } finally {
+    cacherChargement();
   }
-
-  const data = await rechercherRecette(query);
-
-  if (data.recipes.length === 0) {
-    afficherAucuneRecette();
-    return;
-  }
-
-  afficherCard(data.recipes);
 });
 
 // Ouverture du formulaire
@@ -64,7 +97,7 @@ const btnAjouter = document.querySelector("#btn_ajouter_recette");
 
 formRecette.addEventListener("submit", async (event) => {
   event.preventDefault();
-  cacherMessageErreur();
+  cacherErreurFormulaire();
 
   const recette = {
     name: document.querySelector("#nom").value.trim(),
@@ -85,7 +118,10 @@ formRecette.addEventListener("submit", async (event) => {
     return;
   }
 
+  const contenuBouton = btnAjouter.innerHTML;
   btnAjouter.disabled = true;
+  btnAjouter.innerHTML =
+    '<i class="fa-solid fa-spinner animate-spin mr-2"></i>Ajout en cours...';
 
   try {
     const nouvelleRecette = await ajouterRecette(recette);
@@ -101,11 +137,10 @@ formRecette.addEventListener("submit", async (event) => {
     fermerForm();
 
   } catch (error) {
-    afficherMessageErreur(
-      "Impossible d'ajouter la recette. Veuillez réessayer."
-    );
+    afficherErreurFormulaire(getMessageErreur(error));
 
   } finally {
+    btnAjouter.innerHTML = contenuBouton;
     btnAjouter.disabled = false;
   }
 });
